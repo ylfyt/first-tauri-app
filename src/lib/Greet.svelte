@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { rustCall } from '../utils/rust-call';
+  import { rustCall } from "src/utils/rust-call.js";
 
 	let name: string = '';
 	let greetMsg: string = '';
