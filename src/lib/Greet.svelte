@@ -1,15 +1,20 @@
 <script lang="ts">
-	import { invoke } from '@tauri-apps/api';
 	import { rustCall } from '../utils/rust-call';
 
-	let name = '';
-	let greetMsg = '';
+	let name: string = '';
+	let greetMsg: string = '';
 
 	async function greet() {
 		// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-		const res = await invoke<string>('greet', { name });
-		console.log(res);
+		const { data, error } = await rustCall<string>('greet', { name });
+		if (error) {
+			greetMsg = error.message;
+			return;
+		}
+		name = '';
+		greetMsg = data;
+
 		// console.log(error);
 	}
 </script>
